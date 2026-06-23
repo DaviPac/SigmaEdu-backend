@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+# Variáveis de ambiente (nunca commitar)
+.env
+
+# Banco local SQLite
+*.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Pytest / Mypy
+.pytest_cache/
+.mypy_cache/
+
+# Build
+dist/
+build/
+*.egg-info/
