@@ -1,4 +1,4 @@
-﻿import json
+import json
 from pathlib import Path
 from openai import AsyncOpenAI
 from app.config import settings
@@ -25,8 +25,11 @@ def _extract_json(text: str) -> dict:
     import re
     match = re.search(r"\{[\s\S]*\}", text)
     try:
-        return json.loads(match.group(0) if match else text)
-    except (json.JSONDecodeError, AttributeError):
+        result = json.loads(match.group(0) if match else text)
+        if not isinstance(result, dict):
+            raise ValueError("Parsed JSON is not a dictionary")
+        return result
+    except Exception:
         return {"isEnemSubject": False, "subjectName": None, "difficulty": None, "reasoning": "parse error"}
 
 
@@ -55,15 +58,23 @@ Regras:
 3. Se a mensagem for genérica (ex: "oi", "tudo bem"), retorne isEnemSubject = false.
 4. "reasoning" é para uso interno."""
 
-    response = await client.chat.completions.create(
-        model=settings.llm_model,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f'Mensagem do aluno: "{user_message}"'},
-        ],
-    )
+    import logging
+    log = logging.getLogger("ava.acompanhamento_service")
 
-    return _extract_json(response.choices[0].message.content or "")
+    try:
+        response = await client.chat.completions.create(
+            model=settings.llm_model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f'Mensagem do aluno: "{user_message}"'},
+            ],
+            temperature=0.0,
+            response_format={"type": "json_object"},
+        )
+        return _extract_json(response.choices[0].message.content or "")
+    except Exception as e:
+        log.error("Erro na API do Validador: %s", e)
+        return {"isEnemSubject": False, "subjectName": None, "difficulty": None, "reasoning": "api error"}
 
 
 async def run_formulator_agent(user_message: str, validation: dict) -> str:
@@ -83,15 +94,21 @@ Crie um roteiro bruto e super detalhado contendo a explicação da matéria para
 
 Formate em Markdown."""
 
-    response = await client.chat.completions.create(
-        model=settings.llm_model,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f'Dúvida original do aluno: "{user_message}"'},
-        ],
-    )
+    import logging
+    log = logging.getLogger("ava.acompanhamento_service")
 
-    return response.choices[0].message.content or ""
+    try:
+        response = await client.chat.completions.create(
+            model=settings.llm_model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": f'Dúvida original do aluno: "{user_message}"'},
+            ],
+        )
+        return response.choices[0].message.content or ""
+    except Exception as e:
+        log.error("Erro na API do Formulador: %s", e)
+        return ""
 
 
 def _build_professor_system_prompt(personality: str, format_template: str | None, formulator_context: str) -> str:
@@ -164,12 +181,18 @@ async def run_professor_agent(
 
     prompt = f"{history_context}\n\nAluno: {user_message}"
 
-    response = await client.chat.completions.create(
-        model=settings.llm_model,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": prompt},
-        ],
-    )
+    import logging
+    log = logging.getLogger("ava.acompanhamento_service")
 
-    return response.choices[0].message.content or ""
+    try:
+        response = await client.chat.completions.create(
+            model=settings.llm_model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt},
+            ],
+        )
+        return response.choices[0].message.content or ""
+    except Exception as e:
+        log.error("Erro na API do Professor: %s", e)
+        return "Desculpe, estou com instabilidade no momento e não pude gerar sua resposta. Por favor, tente novamente em alguns instantes!"
