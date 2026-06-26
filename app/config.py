@@ -1,5 +1,6 @@
 from pydantic import field_validator
 from pydantic_settings import BaseSettings
+from typing import List
 
 
 class Settings(BaseSettings):
@@ -15,7 +16,18 @@ class Settings(BaseSettings):
     llm_model: str = "gpt-4o-mini"
     llm_base_url: str = "https://api.openai.com/v1"
 
+    # CORS
+    allowed_origins: List[str] = ["http://localhost:3000"]
+
     model_config = {"env_file": ".env"}
+
+    @field_validator("allowed_origins", mode="before")
+    @classmethod
+    def parse_origins(cls, v) -> List[str]:
+        """Converte string separada por vírgula em lista de origens permitidas."""
+        if isinstance(v, str):
+            return [origin.strip() for origin in v.split(",")]
+        return v
 
     @field_validator("database_url", mode="before")
     @classmethod

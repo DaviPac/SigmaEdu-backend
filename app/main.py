@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.database.session import Base, engine, SessionLocal
 from app.routers import auth, users
 from app.routers import ava_acompanhamento, ava_format_generator
 from app.models.user import User
 from app.core.security import hash_password
+from app.config import settings
 
 Base.metadata.create_all(bind=engine)
 
@@ -19,6 +21,14 @@ app = FastAPI(
     title="SigmaEdu API",
     description="API para a plataforma SigmaEdu.",
     version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(auth.router)
