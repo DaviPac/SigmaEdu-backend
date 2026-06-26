@@ -1,0 +1,109 @@
+﻿{
+  "disciplinas": [
+    {
+      "nome": "Geografia",
+      "arquivo_referencia": "Geografia.pdf",
+      "assuntos": [
+        {
+          "tema": "Geografia Geral: Economia",
+          "marcador_de_busca": "Geografia Geral: Economia",
+          "questoes_range": "1 a 23",
+          "dificuldade_estimada": "M├®dio"
+        },
+        {
+          "tema": "Geografia Humana: Quest├Áes Ambientais",
+          "marcador_de_busca": "Geografia Humana: Quest├Áes Ambientais",
+          "questoes_range": "1 a 35",
+          "dificuldade_estimada": "F├ícil"
+        },
+        {
+          "tema": "Geografia Geral: Geo Pol├¡tica",
+          "marcador_de_busca": "Geografia Geral: Geo Pol├¡tica",
+          "questoes_range": "1 a 22",
+          "dificuldade_estimada": "Dif├¡cil"
+        },
+        {
+          "tema": "Geografia do Brasil: Economia",
+          "marcador_de_busca": "Geografia do Brasil: Economia",
+          "questoes_range": "1 a 32",
+          "dificuldade_estimada": "M├®dio"
+        },
+        {
+          "tema": "Geografia do Brasil: Humana",
+          "marcador_de_busca": "Geografia do Brasil: Humana",
+          "questoes_range": "1 a 21",
+          "dificuldade_estimada": "F├ícil"
+        },
+        {
+          "tema": "Geografia do Brasil: F├¡sica",
+          "marcador_de_busca": "Geografia do Brasil: F├¡sica",
+          "questoes_range": "1 a 14",
+          "dificuldade_estimada": "M├®dio"
+        }
+      ]
+    },
+    {
+      "nome": "Matem├ítica",
+      "arquivo_referencia": "Matematica.pdf",
+      "assuntos": [
+        {
+          "tema": "Conhecimentos Num├®ricos",
+          "subtemas": [
+            { "nome": "Potencia├º├úo e Radicia├º├úo", "marcador_de_busca": "2.1 Potencia├º├úo e Radicia├º├úo", "questoes_range": "1 a 6", "dificuldade_estimada": "F├ícil" },
+            { "nome": "Convers├úo e Aproxima├º├úo de Medidas", "marcador_de_busca": "2.2 Convers├úo e Aproxima├º├úo de Medidas", "questoes_range": "1 a 12", "dificuldade_estimada": "F├ícil" },
+            { "nome": "Raz├úo", "marcador_de_busca": "2.3 Raz├úo", "questoes_range": "1 a 14", "dificuldade_estimada": "F├ícil" },
+            { "nome": "Grandezas Proporcionais", "marcador_de_busca": "2.4 Grandezas Proporcionais", "questoes_range": "1 a 19", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Porcentagem", "marcador_de_busca": "2.5 Porcentagem", "questoes_range": "1 a 31", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Opera├º├Áes em Conjuntos Num├®ricos", "marcador_de_busca": "2.6 Opera├º├Áes em Conjuntos Num├®ricos", "questoes_range": "1 a 30", "dificuldade_estimada": "F├ícil" },
+            { "nome": "Sistema de Numera├º├úo Decimal", "marcador_de_busca": "2.7 Sistema de Numera├º├úo Decimal", "questoes_range": "1 a 3", "dificuldade_estimada": "F├ícil" },
+            { "nome": "Matem├ítica Financeira e Juros", "marcador_de_busca": "2.8 Matem├ítica Financeira e Juros", "questoes_range": "1 a 8", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Progress├úo Aritm├®tica", "marcador_de_busca": "2.9 Progress├úo Aritm├®tica", "questoes_range": "1 a 5", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Princ├¡pio Fundamental da Contagem (PFC)", "marcador_de_busca": "2.10 Princ├¡pio Fundamental da Contagem (PFC)", "questoes_range": "1 a 6", "dificuldade_estimada": "Dif├¡cil" },
+            { "nome": "Divisibilidade, N├║mero de Divisores, MDC e Resto da Divis├úo", "marcador_de_busca": "2.11 Divisibilidade, N├║mero de Divisores, MDC e Resto da Divis├úo", "questoes_range": "1 a 4", "dificuldade_estimada": "M├®dio" }
+          ]
+        },
+        {
+          "tema": "Conhecimentos Geom├®tricos",
+          "subtemas": [
+            { "nome": "Per├¡metro", "marcador_de_busca": "3.1 Per├¡metro", "questoes_range": "1 a 2", "dificuldade_estimada": "F├ícil" },
+            { "nome": "├ürea", "marcador_de_busca": "3.2 ├ürea", "questoes_range": "1 a 11", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Escala", "marcador_de_busca": "3.3 Escala", "questoes_range": "1 a 2", "dificuldade_estimada": "M├®dio" },
+            { "nome": "S├│lidos Geom├®tricos", "marcador_de_busca": "3.4 S├│lidos Geom├®tricos", "questoes_range": "1 a 10", "dificuldade_estimada": "Dif├¡cil" },
+            { "nome": "Pol├¡gonos e ├éngulos", "marcador_de_busca": "3.5 Pol├¡gonos e ├éngulos", "questoes_range": "1 a 10", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Circunfer├¬ncia", "marcador_de_busca": "3.6 Circunfer├¬ncia", "questoes_range": "1 a 2", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Estudo de Tri├óngulos", "marcador_de_busca": "3.7 Estudo de Tri├óngulos", "questoes_range": "1 a 2", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Simetria e Proje├º├úo", "marcador_de_busca": "3.8 Simetria e Proje├º├úo", "questoes_range": "1 a 14", "dificuldade_estimada": "F├ícil" }
+          ]
+        },
+        {
+          "tema": "Conhecimentos de Estat├¡stica e Probabilidade",
+          "subtemas": [
+            { "nome": "Gr├íficos e Tabelas", "marcador_de_busca": "4.1 Gr├íficos e Tabelas", "questoes_range": "1 a 14", "dificuldade_estimada": "F├ícil" },
+            { "nome": "M├®dia, Moda e Mediana", "marcador_de_busca": "4.2 M├®dia, Moda e Mediana", "questoes_range": "1 a 26", "dificuldade_estimada": "M├®dio" },
+            { "nome": "No├º├Áes de Estat├¡stica, Desvio e Vari├óncia", "marcador_de_busca": "4.3 No├º├Áes de Estat├¡stica, Desvio e Vari├óncia", "questoes_range": "1 a 3", "dificuldade_estimada": "Dif├¡cil" },
+            { "nome": "Probabilidade", "marcador_de_busca": "4.4 Probabilidade", "questoes_range": "1 a 24", "dificuldade_estimada": "Dif├¡cil" },
+            { "nome": "An├ílise Combinat├│ria", "marcador_de_busca": "4.5 An├ílise Combinat├│ria", "questoes_range": "1 a 6", "dificuldade_estimada": "Dif├¡cil" }
+          ]
+        },
+        {
+          "tema": "Conhecimentos Alg├®bricos",
+          "subtemas": [
+            { "nome": "Logaritmos", "marcador_de_busca": "5.1 Logaritmos", "questoes_range": "1 a 7", "dificuldade_estimada": "Dif├¡cil" },
+            { "nome": "Equa├º├Áes", "marcador_de_busca": "5.2 Equa├º├Áes", "questoes_range": "1 a 8", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Desigualdades e Inequa├º├Áes", "marcador_de_busca": "5.3 Desigualdades e Inequa├º├Áes", "questoes_range": "1 a 8", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Fun├º├Áes", "marcador_de_busca": "5.4 Fun├º├Áes", "questoes_range": "1 a 20", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Fun├º├Áes Trigonom├®tricas", "marcador_de_busca": "5.5 Fun├º├Áes Trigonom├®tricas", "questoes_range": "1 a 3", "dificuldade_estimada": "Dif├¡cil" }
+          ]
+        },
+        {
+          "tema": "Conhecimentos de Geometria Anal├¡tica",
+          "subtemas": [
+            { "nome": "Geometria Anal├¡tica", "marcador_de_busca": "6.1 Geometria Anal├¡tica", "questoes_range": "1 a 14", "dificuldade_estimada": "Dif├¡cil" },
+            { "nome": "Matrizes", "marcador_de_busca": "6.2 Matrizes", "questoes_range": "1 a 3", "dificuldade_estimada": "M├®dio" },
+            { "nome": "Sistemas Lineares", "marcador_de_busca": "6.3 Sistemas Lineares", "questoes_range": "1 a 2", "dificuldade_estimada": "M├®dio" }
+          ]
+        }
+      ]
+    }
+  ]
+}
