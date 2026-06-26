@@ -16,18 +16,15 @@ class Settings(BaseSettings):
     llm_model: str = "gpt-4o-mini"
     llm_base_url: str = "https://api.openai.com/v1"
 
-    # CORS
-    allowed_origins: List[str] = ["http://localhost:3000"]
+    # CORS — valor raw lido do .env como string simples
+    allowed_origins_raw: str = "http://localhost:3000"
 
     model_config = {"env_file": ".env"}
 
-    @field_validator("allowed_origins", mode="before")
-    @classmethod
-    def parse_origins(cls, v) -> List[str]:
-        """Converte string separada por vírgula em lista de origens permitidas."""
-        if isinstance(v, str):
-            return [origin.strip() for origin in v.split(",")]
-        return v
+    @property
+    def allowed_origins(self) -> List[str]:
+        """Converte a string separada por vírgula em lista de origens CORS permitidas."""
+        return [origin.strip() for origin in self.allowed_origins_raw.split(",")]
 
     @field_validator("database_url", mode="before")
     @classmethod
