@@ -4,12 +4,60 @@ from openai import AsyncOpenAI
 from app.config import settings
 
 
-def _load_enem_taxonomy() -> str:
-    """Carrega e retorna a taxonomia ENEM como string JSON."""
+def _load_enem_taxonomy(simplified: bool = False) -> str:
+    """Carrega e retorna a taxonomia ENEM como string JSON.
+    Se simplified=True, remove o nó de questões para economizar tokens do Validador."""
     data_path = Path(__file__).parent.parent / "data" / "enem_banco_questoes.json"
-    if data_path.exists():
-        return data_path.read_text(encoding="utf-8")
-    return "{}"
+    if not data_path.exists():
+        return "{}"
+        
+    content = data_path.read_text(encoding="utf-8")
+    if not simplified:
+        return content
+        
+    try:
+        data = json.loads(content)
+        for disc in data.get("disciplinas", []):
+            for ass in disc.get("assuntos", []):
+                for sub in ass.get("subtemas", []):
+                    if "questoes" in sub:
+                        del sub["questoes"]
+        return json.dumps(data, ensure_ascii=False)
+    except Exception:
+        return content
+
+def _find_subject_data(subject_name: str, difficulty: str) -> str:
+    """Busca os dados reais da questão no banco de dados baseando-se no assunto e dificuldade."""
+    data_path = Path(__file__).parent.parent / "data" / "enem_banco_questoes.json"
+    if not data_path.exists():
+        return ""
+    
+    try:
+        data = json.loads(data_path.read_text(encoding="utf-8"))
+        for disc in data.get("disciplinas", []):
+            for ass in disc.get("assuntos", []):
+                for sub in ass.get("subtemas", []):
+                    if sub.get("nome") == subject_name:
+                        questoes = sub.get("questoes", [])
+                        
+                        # Função auxiliar para ordenar por dificuldade (Fácil -> Médio -> Difícil)
+                        def sort_key(q):
+                            diff = q.get("dificuldade_estimada", "")
+                            if diff == "Fácil": return 1
+                            if diff == "Médio": return 2
+                            if diff == "Difícil": return 3
+                            return 4
+                        
+                        questoes.sort(key=sort_key)
+                        
+                        if difficulty:
+                            q_diff = [q for q in questoes if q.get("dificuldade_estimada") == difficulty]
+                            if q_diff:
+                                return json.dumps(q_diff, ensure_ascii=False, indent=2)
+                        return json.dumps(questoes, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+    return ""
 
 
 def _build_openai_client() -> AsyncOpenAI:
@@ -36,7 +84,7 @@ def _extract_json(text: str) -> dict:
 async def run_validator_agent(user_message: str) -> dict:
     """Aciona o Agente Validador para verificar se a mensagem é sobre conteúdo do ENEM."""
     client = _build_openai_client()
-    taxonomy = _load_enem_taxonomy()
+    taxonomy = _load_enem_taxonomy(simplified=True)
 
     system_prompt = f"""Você é o Agente Validador de Currículo do ENEM.
 Sua missão exclusiva é ler a mensagem do aluno e verificar se o que ele pede está dentro dos assuntos do ENEM.
@@ -65,8 +113,7 @@ Regras:
         response = await client.chat.completions.create(
             model=settings.llm_model,
             messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f'Mensagem do aluno: "{user_message}"'},
+                {"role": "user", "content": f"{system_prompt}\n\nMensagem do aluno: \"{user_message}\""}
             ],
             temperature=0.0,
             response_format={"type": "json_object"},
@@ -81,18 +128,40 @@ async def run_formulator_agent(user_message: str, validation: dict) -> str:
     """Aciona o Agente Formulador para gerar conteúdo didático baseado na validação do ENEM."""
     client = _build_openai_client()
 
+    subject_name = validation.get("subjectName")
+    difficulty = validation.get("difficulty")
+    
+    rag_context = ""
+    if subject_name:
+        subject_data = _find_subject_data(subject_name, difficulty)
+        if subject_data:
+            rag_context = f"\n\nBase de Questões Encontradas para o assunto:\n{subject_data}"
+            
+    rag_instruction = "Utilize UMA DAS QUESTÕES REAIS mapeadas abaixo. Não invente a primeira questão. Escolha SEMPRE a questão classificada como MAIS FÁCIL no banco fornecido." if rag_context else "Crie uma 'Questão Base' fictícia no nível especificado."
+
     system_prompt = f"""Você é o Agente Formulador Pedagógico e conteudista de um cursinho para o ENEM.
 O Agente Validador determinou que o aluno deseja aprender sobre:
-- Assunto: {validation.get("subjectName")}
-- Nível de Dificuldade Estimado no ENEM: {validation.get("difficulty")}
+- Assunto: {subject_name}
+- Nível de Dificuldade Estimado no ENEM: {difficulty}
 
-Sua missão:
-Crie um roteiro bruto e super detalhado contendo a explicação da matéria para que o Professor repasse ao aluno.
-1. Escreva um resumo claro e direto da teoria.
-2. Elabore uma "Questão Exemplo" fictícia, no estilo do ENEM, no nível especificado.
-3. Forneça a resolução detalhada, passo a passo.
+[ESTRUTURA DIDÁTICA OBRIGATÓRIA]
+Você DEVE estruturar o roteiro EXATAMENTE com as seguintes 4 seções, usando Markdown e espaçamento:
 
-Formate em Markdown."""
+### 1. Teoria Direcionada
+Breve explicação teórica e fórmulas focadas ESTRITAMENTE no que é necessário para resolver a questão base.
+
+### 2. A Questão Base
+Apresente a questão escolhida.
+{rag_instruction}
+⚠️ FORMATAÇÃO OBRIGATÓRIA: Coloque O TEXTO INTEIRO desta questão dentro de um bloco de citação Markdown (linhas iniciando com `> `), para destacá-la visualmente.
+
+### 3. Resolução Passo a Passo
+Resolva a questão apresentada de forma detalhada, explicando a lógica de forma clara.
+
+### 4. Desafio de Fixação
+Crie INEDITAMENTE uma NOVA questão no mesmo estilo e mesmo nível da anterior para testar o aluno. Se for matemática, mude apenas os valores ou contexto. Se for outra matéria, mantenha a essência lógica. 
+⚠️ FORMATAÇÃO OBRIGATÓRIA: Destaque também esse Desafio usando blocos de citação (`> `). NÃO resolva o desafio, apenas deixe a pergunta para o aluno.
+{rag_context}"""
 
     import logging
     log = logging.getLogger("ava.acompanhamento_service")
@@ -101,8 +170,7 @@ Formate em Markdown."""
         response = await client.chat.completions.create(
             model=settings.llm_model,
             messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f'Dúvida original do aluno: "{user_message}"'},
+                {"role": "user", "content": f"{system_prompt}\n\nDúvida original do aluno: \"{user_message}\""},
             ],
         )
         return response.choices[0].message.content or ""
@@ -111,8 +179,20 @@ Formate em Markdown."""
         return ""
 
 
-def _build_professor_system_prompt(personality: str, format_template: str | None, formulator_context: str) -> str:
-    """Monta o system prompt do Agente Professor com personalidade e contexto pedagógico."""
+async def run_professor_agent(
+    history: list[dict],
+    user_message: str,
+    personality: str,
+    format_template: str | None,
+    formulator_context: str | None = None,
+    validation: dict | None = None,
+) -> str:
+    """
+    Aciona o Agente Professor para gerar a resposta final ao aluno.
+    Se validation for fornecido em vez de formulator_context, usa a versão otimizada (2 agentes).
+    """
+    client = _build_openai_client()
+
     style_map = {
         "Mais lúdico": "- Use uma linguagem divertida, lúdica e encorajadora. Pode usar emojis à vontade.",
         "Mais direto": "- Seja extremamente direto e conciso. Foque apenas nos fatos.",
@@ -133,43 +213,72 @@ Não adicione NENHUM texto fora deste HTML. Seu retorno deve ser PURAMENTE o có
 Template HTML:
 {format_template}"""
 
-    pedagogical_context = (
-        f"""
+    pedagogical_context = ""
+    
+    # FLUXO OTIMIZADO (Sem Formulador Separado)
+    if validation is not None:
+        if validation.get("supervisor_note"):
+            pedagogical_context = validation["supervisor_note"]
+        elif validation.get("isEnemSubject"):
+            subject_name = validation.get("subjectName")
+            difficulty = validation.get("difficulty")
+            rag_context = ""
+            if subject_name:
+                subject_data = _find_subject_data(subject_name, difficulty)
+                if subject_data:
+                    rag_context = f"\n\n[BANCO DE QUESTÕES REAIS ENCONTRADAS PARA O ASSUNTO]:\n{subject_data}"
+                    
+            rag_instruction = "Utilize UMA DAS QUESTÕES REAIS mapeadas abaixo. Escolha SEMPRE a questão classificada como MAIS FÁCIL no banco fornecido." if rag_context else "Crie uma 'Questão Base' fictícia no nível especificado."
+            
+            pedagogical_context = f"""
+[INSTRUÇÕES PEDAGÓGICAS E ESTRUTURA OBRIGATÓRIA]
+O aluno deseja aprender sobre:
+- Assunto: {subject_name}
+- Nível de Dificuldade: {difficulty}
+
+Você DEVE conversar com o aluno e estruturar a resposta EXATAMENTE com as seguintes 4 seções:
+
+### 1. Teoria Direcionada
+Forneça a teoria estritamente necessária para a questão base.
+
+### 2. A Questão Base
+Apresente a questão escolhida.
+{rag_instruction}
+⚠️ FORMATAÇÃO: O texto da questão DEVE estar envolto em um bloco de citação Markdown (use `> ` no início das linhas) para se destacar visualmente.
+
+### 3. Resolução Passo a Passo
+Resolva a questão base explicando a lógica.
+
+### 4. Desafio de Fixação
+Crie INEDITAMENTE uma NOVA questão no mesmo estilo (mesmo nível, mesmos conceitos, mudando apenas valores ou contexto) para testar o aluno AGORA. 
+⚠️ FORMATAÇÃO: O texto do Desafio também DEVE estar em bloco de citação (`> `). NÃO dê a resposta do desafio, instigue o aluno a tentar resolver!
+{rag_context}
+"""
+    # FLUXO CLÁSSICO (Com Formulador Separado)
+    else:
+        if formulator_context:
+            pedagogical_context = f"""
 [INSTRUÇÃO CRÍTICA DO SETOR PEDAGÓGICO]
 Sua equipe de tutores (O Formulador) já rascunhou a teoria e resolução perfeita para essa dúvida.
 Seu dever é APENAS pegar esse conteúdo técnico e falar com a SUA personalidade.
 Conteúdo técnico a ser repassado:
-\"\"\"
 {formulator_context}
-\"\"\"
 """
-        if formulator_context
-        else ""
-    )
 
-    return f"""Você é o Agente Professor (Acompanhamento) da SigmaEdu — focado em monitorar o progresso do aluno no ENEM.
+    system_prompt = f"""Você é o Agente Professor (Acompanhamento) da SigmaEdu — focado em monitorar o progresso do aluno no ENEM.
 
-Diretrizes:
+Diretrizes de Comportamento:
 - Analise dúvidas sobre o desempenho e direcione o aluno.
 {style_guideline}
 - Responda em português brasileiro.
 - Contextualize as orientações pensando no ENEM.
-- Respostas concisas: 2 a 5 parágrafos no máximo.
+
+[MANUTENÇÃO DE ESTRUTURA OBRIGATÓRIA]
+Independentemente da sua personalidade, você DEVE MANTER INTACTA a estrutura de 4 seções (Teoria, Questão Base, Resolução Passo a Passo, Desafio de Fixação) presente no conteúdo técnico.
+⚠️ É ESTRITAMENTE PROIBIDO remover os blocos de citação (`> `) que envolvem as questões e o desafio! Você deve preservar essa formatação visual.
+
 {pedagogical_context}
 {template_guideline}"""
-
-
-async def run_professor_agent(
-    history: list[dict],
-    user_message: str,
-    personality: str,
-    format_template: str | None,
-    formulator_context: str,
-) -> str:
-    """Aciona o Agente Professor para gerar a resposta final ao aluno."""
-    client = _build_openai_client()
-
-    system_prompt = _build_professor_system_prompt(personality, format_template, formulator_context)
 
     history_context = ""
     if history:
@@ -188,8 +297,7 @@ async def run_professor_agent(
         response = await client.chat.completions.create(
             model=settings.llm_model,
             messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt},
+                {"role": "user", "content": f"{system_prompt}\n\n{prompt}"},
             ],
         )
         return response.choices[0].message.content or ""

@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     # LLM
     openai_api_key: str = ""
     llm_model: str = "gpt-4o-mini"
+    use_formulator_agent: bool = True  # Toggle global para fluxo de 3 agentes (True) vs 2 agentes (False)
     llm_base_url: str = "https://api.openai.com/v1"
 
     # CORS — valor raw lido do .env como string simples
