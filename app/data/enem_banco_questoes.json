@@ -1,4 +1,4 @@
-﻿{
+{
   "disciplinas": [
     {
       "nome": "Geografia",
@@ -101,6 +101,71 @@
             { "nome": "Geometria Anal├¡tica", "marcador_de_busca": "6.1 Geometria Anal├¡tica", "questoes_range": "1 a 14", "dificuldade_estimada": "Dif├¡cil" },
             { "nome": "Matrizes", "marcador_de_busca": "6.2 Matrizes", "questoes_range": "1 a 3", "dificuldade_estimada": "M├®dio" },
             { "nome": "Sistemas Lineares", "marcador_de_busca": "6.3 Sistemas Lineares", "questoes_range": "1 a 2", "dificuldade_estimada": "M├®dio" }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Matemática - Trigonometria Especial",
+      "arquivo_referencia": "LAZUEDU-TRIGONOMETRIA-NO-ENEM.pdf",
+      "assuntos": [
+        {
+          "tema": "Trigonometria Analítica e Funções",
+          "subtemas": [
+            { 
+              "nome": "Funções Trigonométricas (Seno e Cosseno)", 
+              "questoes": [
+                {
+                  "lugar": "LAZUEDU-TRIGONOMETRIA-NO-ENEM.pdf",
+                  "marcador_de_busca": "Funções Trigonométricas",
+                  "questoes_range": "2, 4, 6, 7, 8, 10, 12, 13",
+                  "dificuldade_estimada": "Difícil"
+                },
+                {
+                  "lugar": "banco_interno.json",
+                  "dificuldade_estimada": "Fácil",
+                  "questao": {
+                    "texto_base": "Um farol emite um feixe de luz que gira em velocidade angular constante. À noite, a luz atinge um ponto fixo na costa. O padrão de luminosidade observado nesse ponto varia de forma cíclica e repetitiva ao longo do tempo.",
+                    "enunciado": "A função matemática que melhor descreve essa variação periódica da luminosidade ao longo do tempo é a função:",
+                    "alternativas": [
+                      "A) Linear.",
+                      "B) Exponencial.",
+                      "C) Trigonométrica (seno ou cosseno).",
+                      "D) Logarítmica.",
+                      "E) Quadrática."
+                    ],
+                    "gabarito": "C"
+                  }
+                }
+              ]
+            },
+            { 
+              "nome": "Trigonometria na Geometria (Triângulos e Arcos)", 
+              "questoes": [
+                {
+                  "lugar": "LAZUEDU-TRIGONOMETRIA-NO-ENEM.pdf",
+                  "marcador_de_busca": "Trigonometria Aplicada",
+                  "questoes_range": "1, 3, 5, 9, 11, 14, 15",
+                  "dificuldade_estimada": "Médio"
+                },
+                {
+                  "lugar": "banco_interno.json",
+                  "dificuldade_estimada": "Fácil",
+                  "questao": {
+                    "texto_base": "Um marceneiro está construindo uma rampa reta de madeira para facilitar o acesso de cadeirantes a uma elevação. Ele sabe que a rampa e o solo formam um triângulo retângulo, onde a própria rampa é a hipotenusa e a altura alcançada é o cateto oposto ao ângulo de inclinação.",
+                    "enunciado": "Sabendo o ângulo de inclinação e a altura desejada, qual relação trigonométrica o marceneiro deve utilizar para descobrir o comprimento da rampa?",
+                    "alternativas": [
+                      "A) Seno, que relaciona o cateto oposto com a hipotenusa.",
+                      "B) Cosseno, que relaciona o cateto adjacente com a hipotenusa.",
+                      "C) Tangente, que relaciona o cateto oposto com o cateto adjacente.",
+                      "D) Logaritmo do ângulo de elevação.",
+                      "E) Função exponencial da altura."
+                    ],
+                    "gabarito": "A"
+                  }
+                }
+              ]
+            }
           ]
         }
       ]
