@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     llm_base_url: str = "https://api.openai.com/v1"
 
     # CORS — valor raw lido do .env como string simples
-    allowed_origins_raw: str = "http://localhost:3000"
+    allowed_origins_raw: str = "http://localhost:3000,https://sigma-edu.vercel.app"
 
     model_config = {"env_file": ".env"}
 
