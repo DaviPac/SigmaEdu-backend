@@ -7,7 +7,7 @@ from app.config import settings
 def _load_enem_taxonomy(simplified: bool = False) -> str:
     """Carrega e retorna a taxonomia ENEM como string JSON.
     Se simplified=True, remove o nó de questões para economizar tokens do Validador."""
-    data_path = Path(__file__).parent.parent / "data" / "enem_banco_questoes.json"
+    data_path = Path(__file__).parent.parent / "data" / "banco_questoes" / "enem_banco_questoes.json"
     if not data_path.exists():
         return "{}"
         
@@ -28,7 +28,7 @@ def _load_enem_taxonomy(simplified: bool = False) -> str:
 
 def _find_subject_data(subject_name: str, difficulty: str) -> str:
     """Busca os dados reais da questão no banco de dados baseando-se no assunto e dificuldade."""
-    data_path = Path(__file__).parent.parent / "data" / "enem_banco_questoes.json"
+    data_path = Path(__file__).parent.parent / "data" / "banco_questoes" / "enem_banco_questoes.json"
     if not data_path.exists():
         return ""
     

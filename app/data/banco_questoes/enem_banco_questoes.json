@@ -1,0 +1,413 @@
+{
+  "disciplinas": [
+    {
+      "nome": "Geografia",
+      "arquivo_referencia": "Geografia.pdf",
+      "assuntos": [
+        {
+          "tema": "Geografia Geral: Economia",
+          "subtemas": [
+            {
+              "nome": "Geografia Geral: Economia",
+              "questoes": [
+                {
+                  "lugar": "Geografia.pdf",
+                  "marcador_de_busca": "Geografia Geral: Economia",
+                  "questoes_range": "1 a 23",
+                  "dificuldade_estimada": "Médio"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tema": "Geografia Humana: Questões Ambientais",
+          "subtemas": [
+            {
+              "nome": "Geografia Humana: Questões Ambientais",
+              "questoes": [
+                {
+                  "lugar": "Geografia.pdf",
+                  "marcador_de_busca": "Geografia Humana: Questões Ambientais",
+                  "questoes_range": "1 a 35",
+                  "dificuldade_estimada": "Fácil"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tema": "Geografia Geral: Geo Política",
+          "subtemas": [
+            {
+              "nome": "Geografia Geral: Geo Política",
+              "questoes": [
+                {
+                  "lugar": "Geografia.pdf",
+                  "marcador_de_busca": "Geografia Geral: Geo Política",
+                  "questoes_range": "1 a 22",
+                  "dificuldade_estimada": "Difícil"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tema": "Geografia do Brasil: Economia",
+          "subtemas": [
+            {
+              "nome": "Geografia do Brasil: Economia",
+              "questoes": [
+                {
+                  "lugar": "Geografia.pdf",
+                  "marcador_de_busca": "Geografia do Brasil: Economia",
+                  "questoes_range": "1 a 32",
+                  "dificuldade_estimada": "Médio"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tema": "Geografia do Brasil: Humana",
+          "subtemas": [
+            {
+              "nome": "Geografia do Brasil: Humana",
+              "questoes": [
+                {
+                  "lugar": "Geografia.pdf",
+                  "marcador_de_busca": "Geografia do Brasil: Humana",
+                  "questoes_range": "1 a 21",
+                  "dificuldade_estimada": "Fácil"
+                },
+                {
+                  "lugar": "banco_interno.json",
+                  "dificuldade_estimada": "Médio",
+                  "questao": {
+                    "texto_base": "A urbanização brasileira, acelerada na segunda metade do século XX, foi marcada por um forte êxodo rural e pela concentração populacional em grandes metrópoles, gerando processos de segregação socioespacial.",
+                    "enunciado": "Um dos principais reflexos da rápida urbanização brasileira sem planejamento adequado é:",
+                    "alternativas": [
+                      "A) A distribuição igualitária de infraestrutura urbana em todos os bairros.",
+                      "B) O processo de favelização e ocupação de áreas de risco nas periferias.",
+                      "C) A diminuição do setor terciário na economia das metrópoles.",
+                      "D) O declínio populacional nas capitais do sudeste.",
+                      "E) A erradicação dos problemas de mobilidade urbana."
+                    ],
+                    "gabarito": "B",
+                    "resolucao": "O rápido processo de urbanização no Brasil ocorreu de forma desigual, levando populações de baixa renda a ocuparem áreas periféricas e muitas vezes impróprias para moradia (áreas de risco), ocasionando a favelização devido à falta de planejamento e especulação imobiliária."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tema": "Geografia do Brasil: Física",
+          "subtemas": [
+            {
+              "nome": "Geografia do Brasil: Física",
+              "questoes": [
+                {
+                  "lugar": "Geografia.pdf",
+                  "marcador_de_busca": "Geografia do Brasil: Física",
+                  "questoes_range": "1 a 14",
+                  "dificuldade_estimada": "Médio"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Matemática",
+      "arquivo_referencia": "Matematica.pdf",
+      "assuntos": [
+        {
+          "tema": "Conhecimentos Numéricos",
+          "subtemas": [
+            {
+              "nome": "Potenciação e Radiciação",
+              "marcador_de_busca": "2.1 Potenciação e Radiciação",
+              "questoes_range": "1 a 6",
+              "dificuldade_estimada": "Fácil"
+            },
+            {
+              "nome": "Conversão e Aproximação de Medidas",
+              "marcador_de_busca": "2.2 Conversão e Aproximação de Medidas",
+              "questoes_range": "1 a 12",
+              "dificuldade_estimada": "Fácil"
+            },
+            {
+              "nome": "Razão",
+              "marcador_de_busca": "2.3 Razão",
+              "questoes_range": "1 a 14",
+              "dificuldade_estimada": "Fácil"
+            },
+            {
+              "nome": "Grandezas Proporcionais",
+              "marcador_de_busca": "2.4 Grandezas Proporcionais",
+              "questoes_range": "1 a 19",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Porcentagem",
+              "marcador_de_busca": "2.5 Porcentagem",
+              "questoes_range": "1 a 31",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Operações em Conjuntos Numéricos",
+              "marcador_de_busca": "2.6 Operações em Conjuntos Numéricos",
+              "questoes_range": "1 a 30",
+              "dificuldade_estimada": "Fácil"
+            },
+            {
+              "nome": "Sistema de Numeração Decimal",
+              "marcador_de_busca": "2.7 Sistema de Numeração Decimal",
+              "questoes_range": "1 a 3",
+              "dificuldade_estimada": "Fácil"
+            },
+            {
+              "nome": "Matemática Financeira e Juros",
+              "marcador_de_busca": "2.8 Matemática Financeira e Juros",
+              "questoes_range": "1 a 8",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Progressão Aritmética",
+              "marcador_de_busca": "2.9 Progressão Aritmética",
+              "questoes_range": "1 a 5",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Princípio Fundamental da Contagem (PFC)",
+              "marcador_de_busca": "2.10 Princípio Fundamental da Contagem (PFC)",
+              "questoes_range": "1 a 6",
+              "dificuldade_estimada": "Difícil"
+            },
+            {
+              "nome": "Divisibilidade, Número de Divisores, MDC e Resto da Divisão",
+              "marcador_de_busca": "2.11 Divisibilidade, Número de Divisores, MDC e Resto da Divisão",
+              "questoes_range": "1 a 4",
+              "dificuldade_estimada": "Médio"
+            }
+          ]
+        },
+        {
+          "tema": "Conhecimentos Geométricos",
+          "subtemas": [
+            {
+              "nome": "Perímetro",
+              "marcador_de_busca": "3.1 Perímetro",
+              "questoes_range": "1 a 2",
+              "dificuldade_estimada": "Fácil"
+            },
+            {
+              "nome": "Área",
+              "marcador_de_busca": "3.2 Área",
+              "questoes_range": "1 a 11",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Escala",
+              "marcador_de_busca": "3.3 Escala",
+              "questoes_range": "1 a 2",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Sólidos Geométricos",
+              "marcador_de_busca": "3.4 Sólidos Geométricos",
+              "questoes_range": "1 a 10",
+              "dificuldade_estimada": "Difícil"
+            },
+            {
+              "nome": "Polígonos e Ângulos",
+              "marcador_de_busca": "3.5 Polígonos e Ângulos",
+              "questoes_range": "1 a 10",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Circunferência",
+              "marcador_de_busca": "3.6 Circunferência",
+              "questoes_range": "1 a 2",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Estudo de Triângulos",
+              "marcador_de_busca": "3.7 Estudo de Triângulos",
+              "questoes_range": "1 a 2",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Simetria e Projeção",
+              "marcador_de_busca": "3.8 Simetria e Projeção",
+              "questoes_range": "1 a 14",
+              "dificuldade_estimada": "Fácil"
+            }
+          ]
+        },
+        {
+          "tema": "Conhecimentos de Estatística e Probabilidade",
+          "subtemas": [
+            {
+              "nome": "Gráficos e Tabelas",
+              "marcador_de_busca": "4.1 Gráficos e Tabelas",
+              "questoes_range": "1 a 14",
+              "dificuldade_estimada": "Fácil"
+            },
+            {
+              "nome": "Média, Moda e Mediana",
+              "marcador_de_busca": "4.2 Média, Moda e Mediana",
+              "questoes_range": "1 a 26",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Noções de Estatística, Desvio e Variância",
+              "marcador_de_busca": "4.3 Noções de Estatística, Desvio e Variância",
+              "questoes_range": "1 a 3",
+              "dificuldade_estimada": "Difícil"
+            },
+            {
+              "nome": "Probabilidade",
+              "marcador_de_busca": "4.4 Probabilidade",
+              "questoes_range": "1 a 24",
+              "dificuldade_estimada": "Difícil"
+            },
+            {
+              "nome": "Análise Combinatória",
+              "marcador_de_busca": "4.5 Análise Combinatória",
+              "questoes_range": "1 a 6",
+              "dificuldade_estimada": "Difícil"
+            }
+          ]
+        },
+        {
+          "tema": "Conhecimentos Algébricos",
+          "subtemas": [
+            {
+              "nome": "Logaritmos",
+              "marcador_de_busca": "5.1 Logaritmos",
+              "questoes_range": "1 a 7",
+              "dificuldade_estimada": "Difícil"
+            },
+            {
+              "nome": "Equações",
+              "marcador_de_busca": "5.2 Equações",
+              "questoes_range": "1 a 8",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Desigualdades e Inequações",
+              "marcador_de_busca": "5.3 Desigualdades e Inequações",
+              "questoes_range": "1 a 8",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Funções",
+              "marcador_de_busca": "5.4 Funções",
+              "questoes_range": "1 a 20",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Funções Trigonométricas",
+              "marcador_de_busca": "5.5 Funções Trigonométricas",
+              "questoes_range": "1 a 3",
+              "dificuldade_estimada": "Difícil"
+            }
+          ]
+        },
+        {
+          "tema": "Conhecimentos de Geometria Analítica",
+          "subtemas": [
+            {
+              "nome": "Geometria Analítica",
+              "marcador_de_busca": "6.1 Geometria Analítica",
+              "questoes_range": "1 a 14",
+              "dificuldade_estimada": "Difícil"
+            },
+            {
+              "nome": "Matrizes",
+              "marcador_de_busca": "6.2 Matrizes",
+              "questoes_range": "1 a 3",
+              "dificuldade_estimada": "Médio"
+            },
+            {
+              "nome": "Sistemas Lineares",
+              "marcador_de_busca": "6.3 Sistemas Lineares",
+              "questoes_range": "1 a 2",
+              "dificuldade_estimada": "Médio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "Matemática - Trigonometria Especial",
+      "arquivo_referencia": "LAZUEDU-TRIGONOMETRIA-NO-ENEM.pdf",
+      "assuntos": [
+        {
+          "tema": "Trigonometria Analítica e Funções",
+          "subtemas": [
+            {
+              "nome": "Funções Trigonométricas (Seno e Cosseno)",
+              "questoes": [
+                {
+                  "lugar": "LAZUEDU-TRIGONOMETRIA-NO-ENEM.pdf",
+                  "marcador_de_busca": "Funções Trigonométricas",
+                  "questoes_range": "2, 4, 6, 7, 8, 10, 12, 13",
+                  "dificuldade_estimada": "Difícil"
+                },
+                {
+                  "lugar": "banco_interno.json",
+                  "dificuldade_estimada": "Fácil",
+                  "questao": {
+                    "texto_base": "Um farol emite um feixe de luz que gira em velocidade angular constante. À noite, a luz atinge um ponto fixo na costa. O padrão de luminosidade observado nesse ponto varia de forma cíclica e repetitiva ao longo do tempo.",
+                    "enunciado": "A função matemática que melhor descreve essa variação periódica da luminosidade ao longo do tempo é a função:",
+                    "alternativas": [
+                      "A) Linear.",
+                      "B) Exponencial.",
+                      "C) Trigonométrica (seno ou cosseno).",
+                      "D) Logarítmica.",
+                      "E) Quadrática."
+                    ],
+                    "gabarito": "C",
+                    "resolucao": "Fenômenos cíclicos e repetitivos, como o giro de um feixe de luz de um farol, marés e batimentos cardíacos, são perfeitamente descritos por funções trigonométricas (seno e cosseno), que possuem comportamento periódico."
+                  }
+                }
+              ]
+            },
+            {
+              "nome": "Trigonometria na Geometria (Triângulos e Arcos)",
+              "questoes": [
+                {
+                  "lugar": "LAZUEDU-TRIGONOMETRIA-NO-ENEM.pdf",
+                  "marcador_de_busca": "Trigonometria Aplicada",
+                  "questoes_range": "1, 3, 5, 9, 11, 14, 15",
+                  "dificuldade_estimada": "Médio"
+                },
+                {
+                  "lugar": "banco_interno.json",
+                  "dificuldade_estimada": "Fácil",
+                  "questao": {
+                    "texto_base": "Um marceneiro está construindo uma rampa reta de madeira para facilitar o acesso de cadeirantes a uma elevação. Ele sabe que a rampa e o solo formam um triângulo retângulo, onde a própria rampa é a hipotenusa e a altura alcançada é o cateto oposto ao ângulo de inclinação.",
+                    "enunciado": "Sabendo o ângulo de inclinação e a altura desejada, qual relação trigonométrica o marceneiro deve utilizar para descobrir o comprimento da rampa?",
+                    "alternativas": [
+                      "A) Seno, que relaciona o cateto oposto com a hipotenusa.",
+                      "B) Cosseno, que relaciona o cateto adjacente com a hipotenusa.",
+                      "C) Tangente, que relaciona o cateto oposto com o cateto adjacente.",
+                      "D) Logaritmo do ângulo de elevação.",
+                      "E) Função exponencial da altura."
+                    ],
+                    "gabarito": "A",
+                    "resolucao": "O marceneiro quer descobrir a hipotenusa (rampa) e ele tem o cateto oposto (altura alcançada). A relação matemática que usa Cateto Oposto e Hipotenusa é o Seno."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
