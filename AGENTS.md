@@ -1,4 +1,4 @@
-﻿# AGENTS.md — Diretrizes da Equipe de Desenvolvimento
+# AGENTS.md — Diretrizes da Equipe de Desenvolvimento
 
 > Este arquivo define as regras base de trabalho para todos os agentes e colaboradores deste projeto.
 > Toda nova demanda deve respeitar rigorosamente estas diretrizes.
@@ -83,6 +83,16 @@ O trabalho é orquestrado em sequência por três papéis essenciais:
 | Clean Code | Código limpo, legível e sem duplicação |
 | Cobertura de testes E2E | Toda funcionalidade deve ter testes antes de ser considerada pronta |
 
+*Este arquivo serve como contrato de qualidade para todo o trabalho desenvolvido neste projeto.*
+
 ---
 
-*Este arquivo serve como contrato de qualidade para todo o trabalho desenvolvido neste projeto.*
+## 🚨 Regra de Integração de APIs LLM
+Para evitar erros 400 (Bad Request) em integrações com OpenAI (ou modelos compatíveis via Gemini/Nvidia), é **ESTRITAMENTE PROIBIDO** enviar os papéis `"system"` e `"user"` de forma separada no array de `messages`.
+A regra de ouro é: **Sempre concatene o system prompt e a requisição do usuário em uma única mensagem com a role `"user"`**.
+
+---
+
+## 🚨 Regra de Cobertura QA (Tester)
+O Tester nunca deve dar o trabalho como "concluído" testando apenas a rota principal.
+Se uma alteração envolver serviços base, abstrações genéricas ou instâncias de cliente da API, **TODAS as rotas e endpoints dependentes** (mesmo os menos óbvios) devem ser mapeados e validados antes de sinalizar que a etapa de QA está finalizada.

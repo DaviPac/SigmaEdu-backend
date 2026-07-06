@@ -1,4 +1,4 @@
-﻿from openai import AsyncOpenAI
+from openai import AsyncOpenAI
 from app.config import settings
 
 
@@ -33,15 +33,20 @@ Diretrizes HTML:
 - Retorne APENAS o HTML, sem blocos ```html ou explicações.
 - Use UMA <div> contêiner principal para envelopar tudo.
 - Use classes Tailwind para estilização (backgrounds suaves, borders, padding p-4, rounded-lg, text-sm, space-y-3, dark:bg-gray-800).
-- O template DEVE ter entre 3 a 4 divisões temáticas com títulos (<h3>) e placeholders em colchetes como "[Sua resposta aqui]".
+- O template DEVE ter EXATAMENTE as seguintes 4 divisões temáticas com títulos (<h3>):
+  1. Teoria Direcionada
+  2. A Questão Base
+  3. Resolução Passo a Passo
+  4. Desafio de Fixação
+- Dentro de cada divisão, coloque um placeholder em colchetes como "[Insira o conteúdo aqui]".
+- ATENÇÃO: Nas seções "A Questão Base" e "Desafio de Fixação", envolva o placeholder em um contêiner destacado (ex: um blockquote ou div com border-l-4 e background diferente) para que a questão salte aos olhos e não fique parecendo um texto blocado.
 - Adicione emojis condizentes no título de cada seção.
 - Não use <html>, <body> ou <script>."""
 
     response = await client.chat.completions.create(
         model=settings.llm_model,
         messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Gere o template de resposta HTML (Tailwind) para a personalidade: {personality}"},
+            {"role": "user", "content": f"{system_prompt}\n\nGere o template de resposta HTML (Tailwind) para a personalidade: {personality}"},
         ],
     )
 
