@@ -8,9 +8,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.core.security import hash_password
 from app.database.session import Base, SessionLocal, engine
+from app.models.desempenho import Desempenho  # noqa: F401 — registra tabela no metadata
 from app.models.questao import Questao, QuestaoAlternativa, QuestaoArquivo
 from app.models.user import User
-from app.routers import auth, ava_acompanhamento, ava_format_generator, questoes, users
+from app.routers import auth, ava_acompanhamento, ava_format_generator, desempenho, questoes, users
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("startup")
@@ -92,3 +93,4 @@ app.include_router(users.router)
 app.include_router(ava_acompanhamento.router)
 app.include_router(ava_format_generator.router)
 app.include_router(questoes.router)
+app.include_router(desempenho.router)
